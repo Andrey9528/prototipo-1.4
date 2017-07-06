@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_RRHH2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_departamento">
+          <Key>
+            <PropertyRef Name="Id_departamento" />
+          </Key>
+          <Property Name="Id_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion_d" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_empleado">
+          <Key>
+            <PropertyRef Name="Id_empleado" />
+          </Key>
+          <Property Name="Id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Primer_apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Segundo_apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado_civil" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_naci" Type="date" Nullable="false" />
+          <Property Name="Id_departamento" Type="int" Nullable="false" />
+          <Property Name="Id_rol" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_expediente">
+          <Key>
+            <PropertyRef Name="Id_expediente" />
+          </Key>
+          <Property Name="Id_expediente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_incapacidad" Type="int" />
+          <Property Name="Id_empleado" Type="int" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="date" Nullable="false" />
+          <Property Name="Nivel_academico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seguro_social" Type="int" Nullable="false" />
+          <Property Name="Hora_llegada" Type="int" Nullable="false" />
+          <Property Name="Hora_salida" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tbl_registroIncapacidad">
+          <Key>
+            <PropertyRef Name="Id_incapacidad" />
+          </Key>
+          <Property Name="Id_incapacidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_empleado" Type="int" Nullable="false" />
+          <Property Name="Cantidad_dias" Type="int" Nullable="false" />
+          <Property Name="Tipo_incapacidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_emision" Type="date" Nullable="false" />
+          <Property Name="Centro_emisor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre_doc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_roles">
+          <Key>
+            <PropertyRef Name="Id_rol" />
+          </Key>
+          <Property Name="Id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion_r" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_solicitudVacaciones">
+          <Key>
+            <PropertyRef Name="Id_solicitud" />
+          </Key>
+          <Property Name="Id_solicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_expediente" Type="int" Nullable="false" />
+          <Property Name="Fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="Fecha_final" Type="date" Nullable="false" />
+          <Property Name="Condicion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Total_dias" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="Id_usuario" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Id_rol" Type="int" Nullable="false" />
+          <Property Name="Id_expediente" Type="int" Nullable="false" />
+          <Property Name="Id_empleado" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_empleado_tbl_departamento">
+          <End Role="tbl_departamento" Type="Self.tbl_departamento" Multiplicity="1" />
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departamento">
+              <PropertyRef Name="Id_departamento" />
+            </Principal>
+            <Dependent Role="tbl_empleado">
+              <PropertyRef Name="Id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_empleado_tbl_roles">
+          <End Role="tbl_roles" Type="Self.tbl_roles" Multiplicity="1" />
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_roles">
+              <PropertyRef Name="Id_rol" />
+            </Principal>
+            <Dependent Role="tbl_empleado">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_expediente_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_expediente">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_expediente_tbl_registroIncapacidad">
+          <End Role="tbl_registroIncapacidad" Type="Self.tbl_registroIncapacidad" Multiplicity="0..1" />
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_registroIncapacidad">
+              <PropertyRef Name="Id_incapacidad" />
+            </Principal>
+            <Dependent Role="tbl_expediente">
+              <PropertyRef Name="Id_incapacidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_registroIncapacidad_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_registroIncapacidad" Type="Self.tbl_registroIncapacidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_registroIncapacidad">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_solicitudVacaciones_tbl_expediente">
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="1" />
+          <End Role="tbl_solicitudVacaciones" Type="Self.tbl_solicitudVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_expediente">
+              <PropertyRef Name="Id_expediente" />
+            </Principal>
+            <Dependent Role="tbl_solicitudVacaciones">
+              <PropertyRef Name="Id_expediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_expediente">
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_expediente">
+              <PropertyRef Name="Id_expediente" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_expediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_roles">
+          <End Role="tbl_roles" Type="Self.tbl_roles" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_roles">
+              <PropertyRef Name="Id_rol" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_RRHH2ModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_departamento" EntityType="Self.tbl_departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_empleado" EntityType="Self.tbl_empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_expediente" EntityType="Self.tbl_expediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_registroIncapacidad" EntityType="Self.tbl_registroIncapacidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_roles" EntityType="Self.tbl_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_solicitudVacaciones" EntityType="Self.tbl_solicitudVacaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_empleado_tbl_departamento" Association="Self.FK_tbl_empleado_tbl_departamento">
+            <End Role="tbl_departamento" EntitySet="tbl_departamento" />
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_empleado_tbl_roles" Association="Self.FK_tbl_empleado_tbl_roles">
+            <End Role="tbl_roles" EntitySet="tbl_roles" />
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_expediente_tbl_empleado" Association="Self.FK_tbl_expediente_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_expediente_tbl_registroIncapacidad" Association="Self.FK_tbl_expediente_tbl_registroIncapacidad">
+            <End Role="tbl_registroIncapacidad" EntitySet="tbl_registroIncapacidad" />
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_registroIncapacidad_tbl_empleado" Association="Self.FK_tbl_registroIncapacidad_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_registroIncapacidad" EntitySet="tbl_registroIncapacidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_solicitudVacaciones_tbl_expediente" Association="Self.FK_tbl_solicitudVacaciones_tbl_expediente">
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+            <End Role="tbl_solicitudVacaciones" EntitySet="tbl_solicitudVacaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_empleado" Association="Self.FK_tbl_usuario_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_expediente" Association="Self.FK_tbl_usuario_tbl_expediente">
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_roles" Association="Self.FK_tbl_usuario_tbl_roles">
+            <End Role="tbl_roles" EntitySet="tbl_roles" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_RRHH2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_departamento">
+          <Key>
+            <PropertyRef Name="Id_departamento" />
+          </Key>
+          <Property Name="Id_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_d" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_empleado" Relationship="Self.FK_tbl_empleado_tbl_departamento" FromRole="tbl_departamento" ToRole="tbl_empleado" />
+        </EntityType>
+        <EntityType Name="tbl_empleado">
+          <Key>
+            <PropertyRef Name="Id_empleado" />
+          </Key>
+          <Property Name="Id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Primer_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Segundo_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado_civil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_naci" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="Id_rol" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="tbl_departamento" Relationship="Self.FK_tbl_empleado_tbl_departamento" FromRole="tbl_empleado" ToRole="tbl_departamento" />
+          <NavigationProperty Name="tbl_roles" Relationship="Self.FK_tbl_empleado_tbl_roles" FromRole="tbl_empleado" ToRole="tbl_roles" />
+          <NavigationProperty Name="tbl_expediente" Relationship="Self.FK_tbl_expediente_tbl_empleado" FromRole="tbl_empleado" ToRole="tbl_expediente" />
+          <NavigationProperty Name="tbl_registroIncapacidad" Relationship="Self.FK_tbl_registroIncapacidad_tbl_empleado" FromRole="tbl_empleado" ToRole="tbl_registroIncapacidad" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_usuario_tbl_empleado" FromRole="tbl_empleado" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_expediente">
+          <Key>
+            <PropertyRef Name="Id_expediente" />
+          </Key>
+          <Property Name="Id_expediente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_incapacidad" Type="Int32" />
+          <Property Name="Id_empleado" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nivel_academico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seguro_social" Type="Int32" Nullable="false" />
+          <Property Name="Hora_llegada" Type="Int32" Nullable="false" />
+          <Property Name="Hora_salida" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tbl_empleado" Relationship="Self.FK_tbl_expediente_tbl_empleado" FromRole="tbl_expediente" ToRole="tbl_empleado" />
+          <NavigationProperty Name="tbl_registroIncapacidad" Relationship="Self.FK_tbl_expediente_tbl_registroIncapacidad" FromRole="tbl_expediente" ToRole="tbl_registroIncapacidad" />
+          <NavigationProperty Name="tbl_solicitudVacaciones" Relationship="Self.FK_tbl_solicitudVacaciones_tbl_expediente" FromRole="tbl_expediente" ToRole="tbl_solicitudVacaciones" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_usuario_tbl_expediente" FromRole="tbl_expediente" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_registroIncapacidad">
+          <Key>
+            <PropertyRef Name="Id_incapacidad" />
+          </Key>
+          <Property Name="Id_incapacidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_empleado" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad_dias" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_incapacidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_emision" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Centro_emisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_doc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_empleado" Relationship="Self.FK_tbl_registroIncapacidad_tbl_empleado" FromRole="tbl_registroIncapacidad" ToRole="tbl_empleado" />
+          <NavigationProperty Name="tbl_expediente" Relationship="Self.FK_tbl_expediente_tbl_registroIncapacidad" FromRole="tbl_registroIncapacidad" ToRole="tbl_expediente" />
+        </EntityType>
+        <EntityType Name="tbl_roles">
+          <Key>
+            <PropertyRef Name="Id_rol" />
+          </Key>
+          <Property Name="Id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_r" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_empleado" Relationship="Self.FK_tbl_empleado_tbl_roles" FromRole="tbl_roles" ToRole="tbl_empleado" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_usuario_tbl_roles" FromRole="tbl_roles" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_solicitudVacaciones">
+          <Key>
+            <PropertyRef Name="Id_solicitud" />
+          </Key>
+          <Property Name="Id_solicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_expediente" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_final" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Condicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Total_dias" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="tbl_expediente" Relationship="Self.FK_tbl_solicitudVacaciones_tbl_expediente" FromRole="tbl_solicitudVacaciones" ToRole="tbl_expediente" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="Id_usuario" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Id_rol" Type="Int32" Nullable="false" />
+          <Property Name="Id_expediente" Type="Int32" Nullable="false" />
+          <Property Name="Id_empleado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_empleado" Relationship="Self.FK_tbl_usuario_tbl_empleado" FromRole="tbl_usuario" ToRole="tbl_empleado" />
+          <NavigationProperty Name="tbl_expediente" Relationship="Self.FK_tbl_usuario_tbl_expediente" FromRole="tbl_usuario" ToRole="tbl_expediente" />
+          <NavigationProperty Name="tbl_roles" Relationship="Self.FK_tbl_usuario_tbl_roles" FromRole="tbl_usuario" ToRole="tbl_roles" />
+        </EntityType>
+        <Association Name="FK_tbl_empleado_tbl_departamento">
+          <End Role="tbl_departamento" Type="Self.tbl_departamento" Multiplicity="1" />
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departamento">
+              <PropertyRef Name="Id_departamento" />
+            </Principal>
+            <Dependent Role="tbl_empleado">
+              <PropertyRef Name="Id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_empleado_tbl_roles">
+          <End Role="tbl_roles" Type="Self.tbl_roles" Multiplicity="1" />
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_roles">
+              <PropertyRef Name="Id_rol" />
+            </Principal>
+            <Dependent Role="tbl_empleado">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_expediente_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_expediente">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_registroIncapacidad_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_registroIncapacidad" Type="Self.tbl_registroIncapacidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_registroIncapacidad">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_empleado">
+          <End Role="tbl_empleado" Type="Self.tbl_empleado" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_empleado">
+              <PropertyRef Name="Id_empleado" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_expediente_tbl_registroIncapacidad">
+          <End Role="tbl_registroIncapacidad" Type="Self.tbl_registroIncapacidad" Multiplicity="0..1" />
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_registroIncapacidad">
+              <PropertyRef Name="Id_incapacidad" />
+            </Principal>
+            <Dependent Role="tbl_expediente">
+              <PropertyRef Name="Id_incapacidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_solicitudVacaciones_tbl_expediente">
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="1" />
+          <End Role="tbl_solicitudVacaciones" Type="Self.tbl_solicitudVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_expediente">
+              <PropertyRef Name="Id_expediente" />
+            </Principal>
+            <Dependent Role="tbl_solicitudVacaciones">
+              <PropertyRef Name="Id_expediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_expediente">
+          <End Role="tbl_expediente" Type="Self.tbl_expediente" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_expediente">
+              <PropertyRef Name="Id_expediente" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_expediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_usuario_tbl_roles">
+          <End Role="tbl_roles" Type="Self.tbl_roles" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_roles">
+              <PropertyRef Name="Id_rol" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_RRHH2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbl_departamento" EntityType="Self.tbl_departamento" />
+          <EntitySet Name="tbl_empleado" EntityType="Self.tbl_empleado" />
+          <EntitySet Name="tbl_expediente" EntityType="Self.tbl_expediente" />
+          <EntitySet Name="tbl_registroIncapacidad" EntityType="Self.tbl_registroIncapacidad" />
+          <EntitySet Name="tbl_roles" EntityType="Self.tbl_roles" />
+          <EntitySet Name="tbl_solicitudVacaciones" EntityType="Self.tbl_solicitudVacaciones" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+          <AssociationSet Name="FK_tbl_empleado_tbl_departamento" Association="Self.FK_tbl_empleado_tbl_departamento">
+            <End Role="tbl_departamento" EntitySet="tbl_departamento" />
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_empleado_tbl_roles" Association="Self.FK_tbl_empleado_tbl_roles">
+            <End Role="tbl_roles" EntitySet="tbl_roles" />
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_expediente_tbl_empleado" Association="Self.FK_tbl_expediente_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_registroIncapacidad_tbl_empleado" Association="Self.FK_tbl_registroIncapacidad_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_registroIncapacidad" EntitySet="tbl_registroIncapacidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_empleado" Association="Self.FK_tbl_usuario_tbl_empleado">
+            <End Role="tbl_empleado" EntitySet="tbl_empleado" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_expediente_tbl_registroIncapacidad" Association="Self.FK_tbl_expediente_tbl_registroIncapacidad">
+            <End Role="tbl_registroIncapacidad" EntitySet="tbl_registroIncapacidad" />
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_solicitudVacaciones_tbl_expediente" Association="Self.FK_tbl_solicitudVacaciones_tbl_expediente">
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+            <End Role="tbl_solicitudVacaciones" EntitySet="tbl_solicitudVacaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_expediente" Association="Self.FK_tbl_usuario_tbl_expediente">
+            <End Role="tbl_expediente" EntitySet="tbl_expediente" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_usuario_tbl_roles" Association="Self.FK_tbl_usuario_tbl_roles">
+            <End Role="tbl_roles" EntitySet="tbl_roles" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_RRHH2ModelStoreContainer" CdmEntityContainer="BD_RRHH2Entities1">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_departamento">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_departamento">
+              <MappingFragment StoreEntitySet="tbl_departamento">
+                <ScalarProperty Name="Id_departamento" ColumnName="Id_departamento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion_d" ColumnName="Descripcion_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_empleado">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_empleado">
+              <MappingFragment StoreEntitySet="tbl_empleado">
+                <ScalarProperty Name="Id_empleado" ColumnName="Id_empleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Primer_apellido" ColumnName="Primer_apellido" />
+                <ScalarProperty Name="Segundo_apellido" ColumnName="Segundo_apellido" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Estado_civil" ColumnName="Estado_civil" />
+                <ScalarProperty Name="Fecha_naci" ColumnName="Fecha_naci" />
+                <ScalarProperty Name="Id_departamento" ColumnName="Id_departamento" />
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_expediente">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_expediente">
+              <MappingFragment StoreEntitySet="tbl_expediente">
+                <ScalarProperty Name="Id_expediente" ColumnName="Id_expediente" />
+                <ScalarProperty Name="Id_incapacidad" ColumnName="Id_incapacidad" />
+                <ScalarProperty Name="Id_empleado" ColumnName="Id_empleado" />
+                <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+                <ScalarProperty Name="Nivel_academico" ColumnName="Nivel_academico" />
+                <ScalarProperty Name="Seguro_social" ColumnName="Seguro_social" />
+                <ScalarProperty Name="Hora_llegada" ColumnName="Hora_llegada" />
+                <ScalarProperty Name="Hora_salida" ColumnName="Hora_salida" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_registroIncapacidad">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_registroIncapacidad">
+              <MappingFragment StoreEntitySet="tbl_registroIncapacidad">
+                <ScalarProperty Name="Id_incapacidad" ColumnName="Id_incapacidad" />
+                <ScalarProperty Name="Id_empleado" ColumnName="Id_empleado" />
+                <ScalarProperty Name="Cantidad_dias" ColumnName="Cantidad_dias" />
+                <ScalarProperty Name="Tipo_incapacidad" ColumnName="Tipo_incapacidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha_emision" ColumnName="Fecha_emision" />
+                <ScalarProperty Name="Centro_emisor" ColumnName="Centro_emisor" />
+                <ScalarProperty Name="Nombre_doc" ColumnName="Nombre_doc" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_roles">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_roles">
+              <MappingFragment StoreEntitySet="tbl_roles">
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Descripcion_r" ColumnName="Descripcion_r" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_solicitudVacaciones">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_solicitudVacaciones">
+              <MappingFragment StoreEntitySet="tbl_solicitudVacaciones">
+                <ScalarProperty Name="Id_solicitud" ColumnName="Id_solicitud" />
+                <ScalarProperty Name="Id_expediente" ColumnName="Id_expediente" />
+                <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
+                <ScalarProperty Name="Fecha_final" ColumnName="Fecha_final" />
+                <ScalarProperty Name="Condicion" ColumnName="Condicion" />
+                <ScalarProperty Name="Total_dias" ColumnName="Total_dias" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_usuario">
+            <EntityTypeMapping TypeName="BD_RRHH2Model.tbl_usuario">
+              <MappingFragment StoreEntitySet="tbl_usuario">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+                <ScalarProperty Name="Id_expediente" ColumnName="Id_expediente" />
+                <ScalarProperty Name="Id_empleado" ColumnName="Id_empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<prototipo_1._3.BD.RRHH.tbl_usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_empleado.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_expediente.Nivel_academico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_roles.Puesto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_empleado.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_expediente.Nivel_academico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_roles.Puesto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_usuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_usuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_usuario })
+        </td>
+    </tr>
+}
+
+</table>

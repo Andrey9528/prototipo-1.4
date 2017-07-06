@@ -1,0 +1,38 @@
+﻿@model prototipo_1._3.BD.RRHH.tbl_departamento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Departamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>*@
+            @*@Html.DisplayNameFor(model => model.Nombre)*@
+        <b>Nombre</b>
+
+        @*</dt>*@
+
+        <dd style="margin-top: -19px;">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        @*<dt>*@
+            @*@Html.DisplayNameFor(model => model.Descripcion_d)*@
+            <b style="margin-top: 10px;">Descripción</b>
+
+        @*</dt>*@
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion_d)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_departamento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

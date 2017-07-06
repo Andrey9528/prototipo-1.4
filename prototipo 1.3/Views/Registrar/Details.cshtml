@@ -1,0 +1,66 @@
+﻿@model prototipo_1._3.BD.RRHH.tbl_usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_empleado.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_empleado.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_expediente.Nivel_academico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_expediente.Nivel_academico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_roles.Puesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_roles.Puesto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_usuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

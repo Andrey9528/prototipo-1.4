@@ -1,0 +1,82 @@
+﻿@model prototipo_1._3.BD.RRHH.tbl_registroIncapacidad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>tbl_registroIncapacidad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad_dias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad_dias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_incapacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_incapacidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_emision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_emision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Centro_emisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Centro_emisor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_doc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_doc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_empleado.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_empleado.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_incapacidad }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
